@@ -1,0 +1,38 @@
+<div align="center">
+    <hr>
+    <h4>Company Registration Form</h4>
+    <hr>
+    <table border="1" cellpadding="10" cellspacing=20>
+        <tbody>
+            <tr>
+                <td>
+                    <form align="center" class="company-form" [formGroup]="companyForm" (ngSubmit)="register()">
+                        Company Code:
+                        <p> <input type="text" required=true formControlName="companyCode"> </p>
+                        Company Name:
+                        <p><input type="text" required=true formControlName="companyName"> </p>
+                        Company CEO:
+                        <p><input type="text" required=true formControlName="companyCEO"></p>
+                        Company Turnover:
+                        <p><input type="number" required=true formControlName="companyTurnOver"></p>
+                        Company Website:
+                        <p><input type="text" required=true formControlName="companyWebsite"></p>
+                        Stock Exchange:
+                        <p>
+                            <select size="1" required=true formControlName="stockExchange">
+                                <option value="">--Select--</option>
+                                <option value="BSE">BSE</option>
+                                <option value="NSE">NSE</option>
+                            </select>
+                        </p>
+                        <p>
+                            <button type="submit" class="btn btn-sucess"> Submit </button>
+                            &nbsp;&nbsp;
+                            <button type="reset" class="btn btn-danger"> Reset </button>
+                        </p>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>  
+</div>

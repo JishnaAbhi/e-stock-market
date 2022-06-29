@@ -1,0 +1,38 @@
+<form name="app-component" [formGroup]="appComponentForm">
+    <nav class="navbar navbar-light bg-secondary">
+        <div class="container-fluid">
+            <img src="assets/ems.ico" height="40" width="40" alt="E-Stock Market applicaiton logo" loading="lazy">
+            <h2> E-Stock Market Application</h2>
+            <div class="d-flex">
+
+                <button class="btn btn-sucess" (click)="register()"> Register Company </button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button class="btn btn-sucess" (click)="listAll()"> List All Companies </button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <form name="company-search-form" [formGroup]="companysearchForm" (ngSubmit)="search()">
+                    <input type="text" required=true formControlName="companyCode"> &nbsp;
+                    <button type="submit" class="btn btn-sucess" > Search </button>&nbsp;&nbsp;
+                </form>
+            </div>
+        </div>
+    </nav>
+</form>
+
+<router-outlet>
+
+</router-outlet>
+
+
+<br />
+
+
+<!--
+
+    <app-company-dashboard>
+    </app-company-dashboard>
+<app-company-register-company>
+</app-company-register-company>
+<app-company-get-all></app-company-get-all>
+<app-company-getby-companycode></app-company-getby-companycode>
+<app-stock-details></app-stock-details>
+-->

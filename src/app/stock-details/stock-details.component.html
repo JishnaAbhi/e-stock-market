@@ -1,0 +1,49 @@
+<br>
+<div align="center">
+    <hr>
+    <h4>Stock Details</h4>
+    <hr>
+    <table border="1" cellpadding="10" cellspacing=20>
+        <thead>
+            <tr>
+                <th scope="col"> Stock Id </th>
+                <th scope="col"> Company Code </th>
+                <th scope="col"> Stock Price </th>
+                <th scope="col"> Stock Date </th>
+                <th scope="col"> Stock Time </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor = "let stockDetail of stocksList">
+                <td>{{stockDetail.stockId}}</td>
+                <td>{{stockDetail.companyCode}}</td>
+                <td>{{stockDetail.stockPrice}}</td>
+                <td>{{stockDetail.stockStartDate}}</td>
+                <td>{{stockDetail.stockStartTime}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <br />
+    <table border="1" cellpadding="10" cellspacing=20>
+        <thead>
+            <tr>
+                <th scope="col"> MIN </th>
+                <th scope="col"> MAX </th>
+                <th scope="col"> AVG </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td> {{stockResponse.minStockPrice}} </td>
+                <td> {{stockResponse.maxStockPrice}} </td>
+                <td> {{stockResponse.avgStockPrice}} </td>
+            </tr>
+        </tbody>
+
+    </table>
+    <br />
+    <form class="stock-add" [formGroup]="stockAddForm">
+        <input type="number" formControlName="stockPrice"> &nbsp;&nbsp;
+        <button class="btn btn-sucess" (click)='add()'> Add New Stock </button>
+    </form>
+</div>

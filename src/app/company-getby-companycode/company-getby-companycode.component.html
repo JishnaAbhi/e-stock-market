@@ -1,0 +1,36 @@
+<!-- Table-->
+<div align="center">
+    <hr>
+    <h4>Company Details</h4>
+    <hr>
+    <table border="1" cellpadding="10" cellspacing="20">
+        <thead>
+            <tr>
+                <th scope="col"> Company Code </th>
+                <th scope="col"> Company Name </th>
+                <th scope="col"> Company CEO </th>
+                <th scope="col"> Company TurnOver </th>
+                <th scope="col"> Company Website </th>
+                <th scope="col"> Stock Exchange </th>
+                <th scope="col"> Latest Stock Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{companyDetails.companyCode}}</td>
+                <td>{{companyDetails.companyName}}</td>
+                <td>{{companyDetails.companyCEO}}</td>
+                <td>{{companyDetails.companyTurnOver}}</td>
+                <td>{{companyDetails.companyWebsite}}</td>
+                <td>{{companyDetails.stockExchange}}</td>
+                <td>{{companyDetails.latestStockPrice}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <br />
+    <form class="stock-form" [formGroup]="stockForm">
+        <p> StartDate : <input type="date" formControlName="startdate"> </p>
+        <p> EndDate : <input type="date" formControlName="enddate"> </p>
+        <button class="btn btn-sucess" (click)='loadStockDetails()'> Get Stock Details</button>
+    </form>
+</div>
