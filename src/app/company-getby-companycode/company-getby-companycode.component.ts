@@ -32,11 +32,11 @@ export class CompanyGetbyCompanycodeComponent implements OnInit {
     return this.apiService.getByCompanyCode(this.companyCode).subscribe((response: any) => {
       this.companyDetails.companyCode = response.companyCode;
       this.companyDetails.companyName = response.companyName;
-      this.companyDetails.companyCEO = response.companyCEO;
-      this.companyDetails.companyTurnOver = response.companyTurnOver;
-      this.companyDetails.companyWebsite = response.companyWebsite;
-      this.companyDetails.stockExchange = response.stockExchange;
-      this.companyDetails.latestStockPrice = response.latestStockPrice;
+      this.companyDetails.companyOwner = response.companyOwner;
+      this.companyDetails.companyTurnover = response.companyTurnover;
+      this.companyDetails.website = response.website;
+      // this.companyDetails.stockExchangeType = response.stockExchange;
+      // this.companyDetails.latestStockPrice = response.latestStockPrice;
     });
 
   }

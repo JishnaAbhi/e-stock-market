@@ -1,10 +1,10 @@
 <br>
 <div align="center">
     <hr>
-    <h4>Stock Details</h4>
+    <h4 class="text-dark">EStock Details</h4>
     <hr>
     <table border="1" cellpadding="10" cellspacing=20>
-        <thead>
+        <thead class="bg-warning">
             <tr>
                 <th scope="col"> Stock Id </th>
                 <th scope="col"> Company Code </th>
@@ -25,7 +25,7 @@
     </table>
     <br />
     <table border="1" cellpadding="10" cellspacing=20>
-        <thead>
+        <thead class="bg-warning">
             <tr>
                 <th scope="col"> MIN </th>
                 <th scope="col"> MAX </th>
@@ -43,7 +43,13 @@
     </table>
     <br />
     <form class="stock-add" [formGroup]="stockAddForm">
-        <input type="number" formControlName="stockPrice"> &nbsp;&nbsp;
-        <button class="btn btn-sucess" (click)='add()'> Add New Stock </button>
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-3">
+                <input type="number" class="form-control mb-3" formControlName="stockPrice"> &nbsp;&nbsp;
+                <button class="btn btn-info" (click)='add()'> Add New Stock </button>
+            </div>
+            <div class="col-4"></div>
+        </div>
     </form>
 </div>

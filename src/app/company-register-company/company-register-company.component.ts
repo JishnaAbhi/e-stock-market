@@ -25,13 +25,14 @@ export class CompanyRegisterCompanyComponent implements OnInit {
   companyForm: FormGroup = new FormGroup({
     companyCode: new FormControl(null, Validators.required),
     companyName: new FormControl(null, Validators.required),
-    companyCEO: new FormControl(null, Validators.required),
+    companyOwner: new FormControl(null, Validators.required),
     companyTurnOver: new FormControl(null, [Validators.min(10000000)]),
-    companyWebsite: new FormControl(null, Validators.required),
-    stockExchange: new FormControl()
+    website: new FormControl(null, Validators.required),
+    stockExchange: new FormControl(0)
   });
 
   register() {
+    debugger;
     this.apiService.postCompany(this.companyForm.value).subscribe(
       (response: any) => {
         this.showSuccess();

@@ -1,6 +1,6 @@
 export class addStockRequest {
 
-    companycode!: string
-    stockPrice!: number
+    companycode?: string
+    stockPrice?: number
 
 }

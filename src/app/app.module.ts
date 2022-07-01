@@ -13,7 +13,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
-
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
 
 @NgModule({
   declarations: [
@@ -32,8 +33,10 @@ import { CommonModule } from '@angular/common';
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
-    BrowserAnimationsModule, // required animations module
-    ToastrModule.forRoot()// ToastrModule added
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
+    TooltipModule.forRoot(),
+    ButtonsModule.forRoot()
   ],
 
   providers: [],

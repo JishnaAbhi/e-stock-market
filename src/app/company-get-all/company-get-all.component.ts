@@ -19,7 +19,7 @@ export class CompanyGetAllComponent implements OnInit {
     private route: ActivatedRoute, private toastr: ToastrService) { }
 
   ngOnInit() {
-
+debugger;
     return this.apiService.getAllCompany().subscribe((response: any) => {
       for (const res of response) {
         this.companyDetailsList.push(res);
@@ -27,10 +27,10 @@ export class CompanyGetAllComponent implements OnInit {
     });
   }
 
-  delete(companyCode: string) {
+  delete(companyId: any) {
 
     if (confirm("This action will delete company and all its associated stock details! \nDo you want to proceed?")) {
-      return this.apiService.deleteCompany(companyCode).subscribe(
+      return this.apiService.deleteCompany(companyId).subscribe(
         (response: any) => {
           this.success();
         },

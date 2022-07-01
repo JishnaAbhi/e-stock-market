@@ -1,7 +1,5 @@
-import { NgIf } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { waitForAsync } from '@angular/core/testing';
 import { company } from '../company';
 
 
@@ -11,8 +9,8 @@ import { company } from '../company';
 
 export class ApiService {
 
-  companyUrl = 'http://localhost:8081/api/v1.0/market/company';
-  stockUrl = 'http://localhost:8082/api/v1.0/market/stock';
+  companyUrl = 'https://localhost:44381/api/v1.0/market/Company';
+  stockUrl = 'https://localhost:44320/api/v1.0/market/CompanyEStock';
   registerSuccess: boolean = false;
   companyResponse: company = new company;
   companyResponseList: company[] = new Array;
@@ -26,8 +24,8 @@ export class ApiService {
   //GET,POST,DELETE
 
   //registerCompany using POST
-  postCompany(companyRequest: any) {
-    return this.httpClient.post(this.companyUrl + '/register', companyRequest);
+  postCompany(company: any) {
+    return this.httpClient.post(this.companyUrl + '/register', company);
   }
 
   //get all company
@@ -47,8 +45,8 @@ export class ApiService {
     return this.httpClient.post(this.stockUrl + '/add/' + companycode, formData);
   }
 
-  deleteCompany(companyCode: string) {
-    return this.httpClient.delete(this.companyUrl + '/delete/' + companyCode);
+  deleteCompany(id: string) {
+    return this.httpClient.delete(this.companyUrl + '/Delete/' + id);
   }
 
 }

@@ -1,9 +1,10 @@
 export class company{
-    companyCode!: string;
-    companyName!: string;
-    companyCEO!: string;
-    companyTurnOver!: number;
-    companyWebsite!: string;
-    stockExchange!: string;
-   latestStockPrice!: number;
+    companyId?:number;
+    companyCode?: string;
+    companyName?: string;
+    companyOwner?: string;
+    companyTurnover?: number;
+    website?: string;
+    stockExchangeType?: number;
+   latestStockPrice?: number;
 }
