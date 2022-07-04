@@ -38,11 +38,11 @@ export class ApiService {
   }
 
   getStockByDate(companyCode: string, startdate: Date, enddate: Date) {
-    return this.httpClient.get(this.stockUrl + '/get/' + companyCode + '/' + startdate + '/' + enddate);
+    return this.httpClient.get(this.stockUrl + '/' + companyCode + '/' + startdate + '/' + enddate);
   }
 
-  addStock(companycode: string, formData: any) {
-    return this.httpClient.post(this.stockUrl + '/add/' + companycode, formData);
+  addStock( formData: any) {
+    return this.httpClient.post(this.stockUrl + '/AddStock/' , formData);
   }
 
   deleteCompany(id: string) {

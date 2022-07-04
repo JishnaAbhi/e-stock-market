@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -10,7 +11,8 @@ import { stockDetails } from '../stockDetails';
 @Component({
   selector: 'app-stock-details',
   templateUrl: './stock-details.component.html',
-  styleUrls: ['./stock-details.component.css']
+  styleUrls: ['./stock-details.component.css'],
+  
 })
 export class StockDetailsComponent implements OnInit {
 
@@ -21,6 +23,7 @@ export class StockDetailsComponent implements OnInit {
 
   stockResponse: stockDetails = new stockDetails;
   stocksList: stock[] = [];
+  addStock: stock={};
 
   stockAddForm: FormGroup = new FormGroup({
     stockPrice: new FormControl(null, Validators.required),
@@ -29,12 +32,13 @@ export class StockDetailsComponent implements OnInit {
 
 
   constructor(private router: Router, private httpClient: HttpClient, private apiService: ApiService,
-    private route: ActivatedRoute, private toastr: ToastrService) { }
+    private route: ActivatedRoute, private toastr: ToastrService,
+    public datePipe: DatePipe) { }
 
 
 
   ngOnInit() {
-
+debugger;
     this.route.paramMap.subscribe((req: ParamMap) => {
       this.companyCode = req.get('companyCode');
       this.startdate = req.get('startdate');
@@ -43,24 +47,32 @@ export class StockDetailsComponent implements OnInit {
 
     return this.apiService.getStockByDate(this.companyCode, this.startdate,
       this.enddate).subscribe((response: any) => {
-        this.stockResponse.minStockPrice = response.minStockPrice;
-        this.stockResponse.maxStockPrice = response.maxStockPrice;
-        this.stockResponse.avgStockPrice = response.avgStockPrice;
-        this.stockResponse.stocks = response.stocks;
-        this.stocksList = this.stockResponse.stocks;
+        debugger;
+      //  this.stockResponse.minStockPrice = response?.map(x).reduce((a, b)=>Math.max(a.stockPrize, b)); 
+      //  this.stockResponse.maxStockPrice = response?.reduce((a, b)=>Math.min(a, b)); 
+       // this.stockResponse.avgStockPrice = (this.total / this.arrayLength);
+        // this.stockResponse.minStockPrice = response.minStockPrice;
+        // this.stockResponse.maxStockPrice = response.maxStockPrice;
+        // this.stockResponse.avgStockPrice = response.avgStockPrice;
+        this.stocksList = response;
       });
 
   }
 
   add() {
 
-    this.stockAddForm.setValue({ stockPrice: this.stockAddForm.value.stockPrice, companycode: this.companyCode });
+    this.stockAddForm.setValue({ stockPrice: this.stockAddForm.value.stockPrice, companyCode: this.companyCode});
 
     const formData = new FormData();
     formData.append('stockPrice', this.stockAddForm.value.stockPrice);
     formData.append('companycode', this.companyCode);
 
-    return this.apiService.addStock(this.companyCode, formData).subscribe(
+    this.addStock.stockPrice =  this.stockAddForm.value.stockPrice;
+    this.addStock.companyCode =  this.companyCode;
+    this.addStock.startDate =  new Date();
+    this.addStock.endDate =  new Date();
+
+    return this.apiService.addStock(this.addStock).subscribe(
       (response: any) => {
         this.showSuccess();
         window.location.reload();

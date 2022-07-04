@@ -9,17 +9,17 @@
                 <th scope="col"> Stock Id </th>
                 <th scope="col"> Company Code </th>
                 <th scope="col"> Stock Price </th>
-                <th scope="col"> Stock Date </th>
-                <th scope="col"> Stock Time </th>
+                <th scope="col"> Start Date </th>
+                <th scope="col"> End Date </th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor = "let stockDetail of stocksList">
-                <td>{{stockDetail.stockId}}</td>
-                <td>{{stockDetail.companyCode}}</td>
+                <td>{{stockDetail.companyStockId}}</td>
+                <td>{{companyCode}}</td>
                 <td>{{stockDetail.stockPrice}}</td>
-                <td>{{stockDetail.stockStartDate}}</td>
-                <td>{{stockDetail.stockStartTime}}</td>
+                <td>{{stockDetail.startDate | date:'short'}}</td>
+                <td>{{stockDetail.endDate | date:'short'}}</td>
             </tr>
         </tbody>
     </table>

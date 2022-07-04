@@ -14,7 +14,7 @@ import { ApiService } from '../service/api.service';
 })
 export class CompanyGetbyCompanycodeComponent implements OnInit {
 
-  companyCode!: any;
+  companyCode?: any;
 
   companyDetails: company = new company;
 
@@ -30,11 +30,13 @@ export class CompanyGetbyCompanycodeComponent implements OnInit {
     });
     
     return this.apiService.getByCompanyCode(this.companyCode).subscribe((response: any) => {
+      debugger;
       this.companyDetails.companyCode = response.companyCode;
       this.companyDetails.companyName = response.companyName;
       this.companyDetails.companyOwner = response.companyOwner;
       this.companyDetails.companyTurnover = response.companyTurnover;
       this.companyDetails.website = response.website;
+      this.companyDetails.companyId =response.companyId;
       // this.companyDetails.stockExchangeType = response.stockExchange;
       // this.companyDetails.latestStockPrice = response.latestStockPrice;
     });
