@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'registerCompany', component: CompanyRegisterCompanyComponent },
   { path: 'getAllCompany', component: CompanyGetAllComponent },
   { path: 'getByCompanyCode/:companyCode', component: CompanyGetbyCompanycodeComponent },//getByCompanyCode/:companyCode
-  { path: 'getStockByDate/:companyCode/:startdate/:enddate', component: StockDetailsComponent }
+  { path: 'getStockByDate/:companyCode/:startdate/:enddate/:companyId', component: StockDetailsComponent }
 ];
 
 @NgModule({

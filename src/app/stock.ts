@@ -1,12 +1,10 @@
 import { Time } from "@angular/common";
 
 export class stock {
-    id?: string;
     companyStockId?: number;
-    companyId?: string;
+    companyId?: number;
     stockPrice?: number;
     startDate?: Date;
     endDate?: Date;
-    companyCode?:string;
 }
      
