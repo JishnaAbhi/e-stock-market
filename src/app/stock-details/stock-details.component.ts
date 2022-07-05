@@ -12,22 +12,24 @@ import { stockDetails } from '../stockDetails';
   selector: 'app-stock-details',
   templateUrl: './stock-details.component.html',
   styleUrls: ['./stock-details.component.css'],
-  
+
 })
 export class StockDetailsComponent implements OnInit {
 
   companyCode!: any;
-  startdate!: any;
-  enddate!: any;
+  fromDate!: any;
+  toDate!: any;
   companyId!: any;
 
 
   stockResponse: stockDetails = new stockDetails;
   stocksList: stock[] = [];
-  addStock: stock={};
+  addStock: stock = {};
 
   stockAddForm: FormGroup = new FormGroup({
     stockPrice: new FormControl(null, Validators.required),
+    startDate: new FormControl(null, Validators.required),
+    endDate: new FormControl(null, Validators.required),
     // companycode: new FormControl(null, Validators.required)
   });
 
@@ -39,40 +41,48 @@ export class StockDetailsComponent implements OnInit {
 
 
   ngOnInit() {
-debugger;
+    debugger;
+    let date: Date = new Date();
+    this.fromDate = this.datePipe.transform((date), 'yyyy-MM-dd');
+    this.toDate = this.datePipe.transform((new Date(date.setDate(date.getDate() + 60))), 'yyyy-MM-dd');
     this.route.paramMap.subscribe((req: ParamMap) => {
       this.companyCode = req.get('companyCode');
-      this.startdate = req.get('startdate');
-      this.enddate = req.get('enddate');
+      //  this.startdate = req.get('startdate');
+      // this.enddate = req.get('enddate');
       this.companyId = req.get('companyId');
     })
 
-    return this.apiService.getStockByDate(this.companyCode, this.startdate,
-      this.enddate).subscribe((response: any) => {
+    debugger;
+    this.getstockdatas();
+  }
+  getstockdatas() {
+    return this.apiService.getStockByDate(this.companyCode, this.fromDate,
+      this.toDate).subscribe((response: any) => {
         debugger;
         this.stocksList = response;
-        this.stockResponse.minStockPrice =  this.stocksList?.map(x => x.stockPrice ?? 0)?.reduce((a,b)=>Math.min(a, b)) ?? 0; 
-        this.stockResponse.maxStockPrice =  this.stocksList?.map(x => x.stockPrice ?? 0)?.reduce((a,b)=>Math.max(a, b)) ?? 0;  
-        this.stockResponse.avgStockPrice =Math.round((this.stocksList?.map(x => x.stockPrice ?? 0)?.reduce((a, b)=>a + b))/ this.stocksList?.length) ?? 0;
+        this.stockResponse.minStockPrice = this.stocksList?.map(x => x.stockPrice ?? 0)?.reduce((a, b) => Math.min(a, b)) ?? 0;
+        this.stockResponse.maxStockPrice = this.stocksList?.map(x => x.stockPrice ?? 0)?.reduce((a, b) => Math.max(a, b)) ?? 0;
+        this.stockResponse.avgStockPrice = Math.round((this.stocksList?.map(x => x.stockPrice ?? 0)?.reduce((a, b) => a + b)) / this.stocksList?.length) ?? 0;
       });
 
   }
 
-  
   add() {
 
-    this.stockAddForm.setValue({ stockPrice: this.stockAddForm.value.stockPrice
-      // , companyCode: this.companyCode
+    this.stockAddForm.setValue({
+      stockPrice: this.stockAddForm.value.stockPrice,
+      startDate: this.stockAddForm.value.startDate,
+      endDate: this.stockAddForm.value.endDate
     });
 
     // const formData = new FormData();
     // formData.append('stockPrice', this.stockAddForm.value.stockPrice);
     // formData.append('companycode', this.companyCode);
 
-    this.addStock.stockPrice =  this.stockAddForm.value.stockPrice;
-    this.addStock.companyId =  parseInt(this.companyId);
-    this.addStock.startDate =  new Date();
-    this.addStock.endDate =  new Date();
+    this.addStock.stockPrice = this.stockAddForm.value.stockPrice;
+    this.addStock.companyId = parseInt(this.companyId);
+    this.addStock.startDate = this.stockAddForm.value.startDate;
+    this.addStock.endDate = this.stockAddForm.value.endDate;
 
     return this.apiService.addStock(this.addStock).subscribe(
       (response: any) => {

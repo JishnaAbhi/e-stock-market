@@ -51,8 +51,7 @@ export class CompanyGetbyCompanycodeComponent implements OnInit {
 
 
   loadStockDetails() {
-    this.router.navigateByUrl('getStockByDate/' + this.companyCode + '/' + this.stockForm.value.startdate + '/' +
-      this.stockForm.value.enddate + '/' +  this.companyDetails.companyId);
+    this.router.navigateByUrl('getStockByDate/' + this.companyCode + '/' +  this.companyDetails.companyId);
   }
 
 }

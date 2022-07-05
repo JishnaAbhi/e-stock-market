@@ -3,6 +3,18 @@
     <hr>
     <h4 class="text-dark">EStock Details</h4>
     <hr>
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-2"> 
+            <p> From Date : <input type="date"  class="form-control" [(ngModel)]="fromDate"> </p>
+        </div>
+        <div class="col-2">
+            <p> To Date : <input type="date"  class="form-control"  [(ngModel)]="toDate"> </p>
+        </div>
+        <div class="col-1 pt-4">
+            <button (click)="getstockdatas()" class="btn btn-sm btn-info">Search</button>
+        </div>
+    </div>
     <table border="1" cellpadding="10" cellspacing=20>
         <thead class="bg-warning">
             <tr>
@@ -42,11 +54,17 @@
 
     </table>
     <br />
+    <hr>
+    <h4 class="text-dark"> Add EStock</h4>
+    <hr>
     <form class="stock-add" [formGroup]="stockAddForm">
         <div class="row">
             <div class="col-4"></div>
             <div class="col-3">
-                <input type="number" placeholder="Stock Price" class="form-control mb-3" formControlName="stockPrice"> &nbsp;&nbsp;
+                <input type="number" placeholder="Stock Price" class="form-control" formControlName="stockPrice"> &nbsp;&nbsp;
+                <p> Start Date:<input type="date" placeholder="Start Date" class="form-control"  formControlName="startDate"> </p>
+                <p> End Date:<input type="date"  placeholder="End Date" class="form-control"  formControlName="endDate"> </p>
+               
                 <button class="btn btn-info" (click)='add()'> Add New Stock </button>
             </div>
             <div class="col-4"></div>
