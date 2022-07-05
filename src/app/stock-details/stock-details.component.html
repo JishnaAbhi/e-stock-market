@@ -4,70 +4,76 @@
     <h4 class="text-dark">EStock Details</h4>
     <hr>
     <div class="row">
-        <div class="col-4"></div>
-        <div class="col-2"> 
-            <p> From Date : <input type="date"  class="form-control" [(ngModel)]="fromDate"> </p>
+        <div class="col-4">
+            <hr>
+            <h4 class="text-dark"> Add EStock</h4>
+            <hr>
+            <form class="stock-add" [formGroup]="stockAddForm">
+                <div class="row">
+                    <div class="col-12 p-5">
+                        <input type="number" placeholder="Stock Price" class="form-control" formControlName="stockPrice"> &nbsp;&nbsp;
+                        <p> Start Date:<input type="date" placeholder="Start Date" class="form-control"  formControlName="startDate"> </p>
+                        <p> End Date:<input type="date"  placeholder="End Date" class="form-control"  formControlName="endDate"> </p>
+                       
+                        <button class="btn btn-info" (click)='add()'> Add New Stock </button>
+                    </div>
+                </div>
+            </form>
         </div>
-        <div class="col-2">
-            <p> To Date : <input type="date"  class="form-control"  [(ngModel)]="toDate"> </p>
-        </div>
-        <div class="col-1 pt-4">
-            <button (click)="getstockdatas()" class="btn btn-sm btn-info">Search</button>
+        <div class="col-8">
+            <div class="row">
+                <div class="col-4"></div>
+                <div class="col-2"> 
+                    <p> From Date : <input type="date"  class="form-control" [(ngModel)]="fromDate"> </p>
+                </div>
+                <div class="col-2">
+                    <p> To Date : <input type="date"  class="form-control"  [(ngModel)]="toDate"> </p>
+                </div>
+                <div class="col-1 pt-4">
+                    <button (click)="getstockdatas()" class="btn btn-sm btn-info">Search</button>
+                </div>
+            </div>
+            <table border="1" cellpadding="10" cellspacing=20>
+                <thead class="bg-warning">
+                    <tr>
+                        <th scope="col"> Stock Id </th>
+                        <th scope="col"> Company Code </th>
+                        <th scope="col"> Stock Price </th>
+                        <th scope="col"> Start Date </th>
+                        <th scope="col"> End Date </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor = "let stockDetail of stocksList">
+                        <td>{{stockDetail.companyStockId}}</td>
+                        <td>{{companyCode}}</td>
+                        <td>{{stockDetail.stockPrice}}</td>
+                        <td>{{stockDetail.startDate | date:'short'}}</td>
+                        <td>{{stockDetail.endDate | date:'short'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <br />
+            <table border="1" cellpadding="10" cellspacing=20>
+                <thead class="bg-warning">
+                    <tr>
+                        <th scope="col"> MIN </th>
+                        <th scope="col"> MAX </th>
+                        <th scope="col"> AVG </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td> {{stockResponse.minStockPrice}} </td>
+                        <td> {{stockResponse.maxStockPrice}} </td>
+                        <td> {{stockResponse.avgStockPrice}} </td>
+                    </tr>
+                </tbody>
+        
+            </table>
+            <br />
         </div>
     </div>
-    <table border="1" cellpadding="10" cellspacing=20>
-        <thead class="bg-warning">
-            <tr>
-                <th scope="col"> Stock Id </th>
-                <th scope="col"> Company Code </th>
-                <th scope="col"> Stock Price </th>
-                <th scope="col"> Start Date </th>
-                <th scope="col"> End Date </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor = "let stockDetail of stocksList">
-                <td>{{stockDetail.companyStockId}}</td>
-                <td>{{companyCode}}</td>
-                <td>{{stockDetail.stockPrice}}</td>
-                <td>{{stockDetail.startDate | date:'short'}}</td>
-                <td>{{stockDetail.endDate | date:'short'}}</td>
-            </tr>
-        </tbody>
-    </table>
-    <br />
-    <table border="1" cellpadding="10" cellspacing=20>
-        <thead class="bg-warning">
-            <tr>
-                <th scope="col"> MIN </th>
-                <th scope="col"> MAX </th>
-                <th scope="col"> AVG </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td> {{stockResponse.minStockPrice}} </td>
-                <td> {{stockResponse.maxStockPrice}} </td>
-                <td> {{stockResponse.avgStockPrice}} </td>
-            </tr>
-        </tbody>
 
-    </table>
-    <br />
-    <hr>
-    <h4 class="text-dark"> Add EStock</h4>
-    <hr>
-    <form class="stock-add" [formGroup]="stockAddForm">
-        <div class="row">
-            <div class="col-4"></div>
-            <div class="col-3">
-                <input type="number" placeholder="Stock Price" class="form-control" formControlName="stockPrice"> &nbsp;&nbsp;
-                <p> Start Date:<input type="date" placeholder="Start Date" class="form-control"  formControlName="startDate"> </p>
-                <p> End Date:<input type="date"  placeholder="End Date" class="form-control"  formControlName="endDate"> </p>
-               
-                <button class="btn btn-info" (click)='add()'> Add New Stock </button>
-            </div>
-            <div class="col-4"></div>
-        </div>
-    </form>
+   
 </div>
