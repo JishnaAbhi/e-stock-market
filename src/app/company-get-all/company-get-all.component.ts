@@ -19,8 +19,12 @@ export class CompanyGetAllComponent implements OnInit {
     private route: ActivatedRoute, private toastr: ToastrService) { }
 
   ngOnInit() {
-debugger;
+    this.getcompanyList();
+  }
+
+  getcompanyList(){
     return this.apiService.getAllCompany().subscribe((response: any) => {
+      this.companyDetailsList =[];
       for (const res of response) {
         this.companyDetailsList.push(res);
       }
@@ -32,24 +36,15 @@ debugger;
     if (confirm("This action will delete company and all its associated stock details! \nDo you want to proceed?")) {
       return this.apiService.deleteCompany(companyId).subscribe(
         (response: any) => {
-          this.success();
+          this.toastr.warning("Company Deleted Successfully!");
+          this.getcompanyList();
         },
         (error: any) => {
-          this.failure();
+          this.toastr.error("Something went wrong while deleting company details!");
+          this.getcompanyList();
         });
     }
 
     return;
   }
-
-  success() {
-    this.toastr.warning("Company Deleted Successfully!");
-    window.location.reload();
-  }
-
-  failure() {
-    this.toastr.error("Something went wrong while deleting company details!");
-    window.location.reload();
-  }
-
 }

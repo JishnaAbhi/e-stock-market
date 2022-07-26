@@ -30,7 +30,7 @@ export class CompanyGetbyCompanycodeComponent implements OnInit {
     });
     
     return this.apiService.getByCompanyCode(this.companyCode).subscribe((response: any) => {
-      debugger;
+ 
       this.companyDetails.companyCode = response.companyCode;
       this.companyDetails.companyName = response.companyName;
       this.companyDetails.companyOwner = response.companyOwner;

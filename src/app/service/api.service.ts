@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { company } from '../company';
 
 
@@ -9,8 +10,8 @@ import { company } from '../company';
 
 export class ApiService {
 
-  companyUrl = 'https://localhost:44381/api/v1.0/market/Company';
-  stockUrl = 'https://localhost:44320/api/v1.0/market/CompanyEStock';
+  companyUrl = 'http://20.241.198.252/api/v1.0/market/Company';
+  stockUrl = 'http://20.88.188.111/api/v1.0/market/CompanyEStock';
   registerSuccess: boolean = false;
   companyResponse: company = new company;
   companyResponseList: company[] = new Array;
@@ -24,7 +25,7 @@ export class ApiService {
   //GET,POST,DELETE
 
   //registerCompany using POST
-  postCompany(company: any) {
+  postCompany(company: any):Observable<any> {
     return this.httpClient.post(this.companyUrl + '/register', company);
   }
 

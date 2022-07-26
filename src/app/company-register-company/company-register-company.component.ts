@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ApiService } from '../service/api.service';
 
@@ -16,7 +16,8 @@ import { ApiService } from '../service/api.service';
 export class CompanyRegisterCompanyComponent implements OnInit {
 
   constructor(private router: Router, private httpClient: HttpClient,
-    private apiService: ApiService, private toastr: ToastrService) {
+    private apiService: ApiService, private toastr: ToastrService,
+    private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit() {
@@ -32,25 +33,14 @@ export class CompanyRegisterCompanyComponent implements OnInit {
   });
 
   register() {
-    debugger;
     this.apiService.postCompany(this.companyForm.value).subscribe(
       (response: any) => {
-        this.showSuccess();
-        window.location.reload();
+        this.toastr.success('Company Registered Successfully!');
+        this.companyForm.reset();
       },
       (error) => {
-        this.showError();
-        window.location.reload();
+        this.toastr.error('Something went wrong while registration!');
       }
     );
   }
-
-  showSuccess() {
-    this.toastr.success('Company Registered Successfully!');
-  }
-
-  showError() {
-    this.toastr.error('Something went wrong while registration!')
-  }
-
 }

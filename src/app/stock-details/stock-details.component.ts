@@ -41,7 +41,6 @@ export class StockDetailsComponent implements OnInit {
 
 
   ngOnInit() {
-    debugger;
     let date: Date = new Date();
     this.fromDate = this.datePipe.transform((date), 'yyyy-MM-dd');
     this.toDate = this.datePipe.transform((new Date(date.setDate(date.getDate() + 60))), 'yyyy-MM-dd');
@@ -52,13 +51,12 @@ export class StockDetailsComponent implements OnInit {
       this.companyId = req.get('companyId');
     })
 
-    debugger;
     this.getstockdatas();
   }
   getstockdatas() {
     return this.apiService.getStockByDate(this.companyCode, this.fromDate,
       this.toDate).subscribe((response: any) => {
-        debugger;
+        this.stocksList = [];
         this.stocksList = response;
         this.stockResponse.minStockPrice = this.stocksList?.map(x => x.stockPrice ?? 0)?.reduce((a, b) => Math.min(a, b)) ?? 0;
         this.stockResponse.maxStockPrice = this.stocksList?.map(x => x.stockPrice ?? 0)?.reduce((a, b) => Math.max(a, b)) ?? 0;
@@ -75,10 +73,6 @@ export class StockDetailsComponent implements OnInit {
       endDate: this.stockAddForm.value.endDate
     });
 
-    // const formData = new FormData();
-    // formData.append('stockPrice', this.stockAddForm.value.stockPrice);
-    // formData.append('companycode', this.companyCode);
-
     this.addStock.stockPrice = this.stockAddForm.value.stockPrice;
     this.addStock.companyId = parseInt(this.companyId);
     this.addStock.startDate = this.stockAddForm.value.startDate;
@@ -86,22 +80,13 @@ export class StockDetailsComponent implements OnInit {
 
     return this.apiService.addStock(this.addStock).subscribe(
       (response: any) => {
-        this.showSuccess();
-        window.location.reload();
+        this.toastr.success('Stock Details Added Successfully!');
+        this.stockAddForm.reset();
+        this.getstockdatas();
       },
       (error: any) => {
-        this.showError();
-        window.location.reload();
+        this.toastr.error('Something went wrong while adding Stock!');
       }
     );
   }
-
-  showSuccess() {
-    this.toastr.success('Stock Details Added Successfully!');
-  }
-
-  showError() {
-    this.toastr.error('Something went wrong while adding Stock!')
-  }
-
 }
